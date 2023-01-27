@@ -12,6 +12,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: https://threeshades.000webhostapp.com/
-        username: muspha
+        username: threeshades
         password: )miCEt1FxGn@y2^KPEuE
         server-dir : public_html/
