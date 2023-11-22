@@ -1,0 +1,26 @@
+﻿@page
+@model ThreeShades.MVC.ViewModels.DutyList
+@{
+    Layout = "_Layout";
+}
+<table class="table table-striped">
+    @foreach (var duty in Model.Active)
+    {
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">État</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@duty.Id</th>
+                <td>@duty.Title</td>
+                <td>@duty.Deadline</td>
+                <td><input type="checkbox" asp-for="Active.First(d => d.Id == duty.Id)" asp-action="Finish" asp-controller="Duties"/></td>
+            </tr>
+        </tbody>
+    }
+</table>

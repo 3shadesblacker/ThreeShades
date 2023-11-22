@@ -1,0 +1,84 @@
+﻿@using WebAPI.Models;
+@model DutyViewModel
+@{
+    Layout = null;
+}
+<script>
+    function edit(id) {
+        if (!id) { id = -1; }
+        $.ajax({
+            url: '@Url.Action("Edit", "Duty")',
+            data: { id: id },
+            type: 'GET',
+            success: function (result) {
+                showEditPopup(result);
+            },
+            error: function () {
+                Swal.fire('Erreur', 'Une erreur est survenue lors du chargement des données.', 'error');
+            }
+        });
+    }
+
+    function showEditPopup(data) {
+        Swal.fire({
+            title: 'Détails',
+            html: `
+                    <div class="card text-center edit">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-control-label" for="titleInput">Titre</label>
+                                <input placeholder="Titre" id="titleInput" class="form-control" value="@Model.Title" />
+                            </div>
+                            <div class="form-group">
+                                    <label class="form-control-label" for="descriptionInput">Description</label>
+                                <textarea placeholder="Description" id="descriptionInput" class="form-control">@Model.Description</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="deadlineInput">Deadline</label>
+                                <input id="deadlineInput" type="datetime-local" class="form-control" value="@(Model.Deadline ?? DateTime.Now)" />
+                            </div>
+                        </div>
+                    </div>
+                `,
+            showCancelButton: true,
+            confirmButtonText: 'Enregistrer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const title = $('#titleInput').val();
+                const description = $('#descriptionInput').val();
+                const deadline = $('#deadlineInput').val();
+                id = @Model.Key;
+                if (id === 0) {
+                    $.ajax({
+                        url: '@Url.Action("Create", "Duty")',
+                        data: { Id: id, Title: title, Description: description, Deadline: deadline },
+                        type: 'POST',
+                        success: function () {
+                            Swal.fire('Enregistré!', '', 'success');
+                        },
+                        error: function () {
+                            showEditPopup({ title, description, deadline });
+                            Swal.fire('Erreur', 'Une erreur est survenue lors de la mise à jour.', 'error');
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: '@Url.Action("Save", "Duty")',
+                        data: { Id: id, Title: title, Description: description, Deadline: deadline },
+                        type: 'POST',
+                        success: function () {
+                            Swal.fire('Enregistré!', '', 'success');
+                        },
+                        error: function () {
+                            showEditPopup({ title, description, deadline });
+                            Swal.fire('Erreur', 'Une erreur est survenue lors de la mise à jour.', 'error');
+                        }
+                    });
+                }
+            } else if (result.isDenied) {
+                Swal.fire('Annulé', '', 'info');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,34 @@
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.nav-link {
+    flex:auto;
+    flex-direction:row;
+    display: flex !important;
+}
+
+table {
+    width: 100%
+}
+
+dataTables_length{
+    width: 0%;
+}
+
+dataTables_length > select {
+    text-align: center;
+    width: auto !important;
+}

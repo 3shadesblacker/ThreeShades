@@ -1,0 +1,15 @@
+@import url('https://fonts.cdnfonts.com/css/cascadia-code');
+
+body {
+    background-color: lavender;
+    font-family: 'Cascadia Code', sans-serif;
+}
+
+.come_back {
+    margin: auto;
+}
+
+.under_water {
+    width: 50%;
+    margin: 10% 25% 0;
+}

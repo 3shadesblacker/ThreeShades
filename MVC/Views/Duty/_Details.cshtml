@@ -1,0 +1,41 @@
+﻿@using WebAPI.Models;
+@model DutyViewModel
+@{
+    Layout = null;
+}
+
+
+<script>
+    function details()
+    {
+        Swal.fire(
+            {
+                html:   `
+                        <div class="card text-center details" hidden>
+                            <div class="card-header">
+                                Détails
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <label asp-for="Title" class="form-check-label" disabled></label>
+                                    <input asp-for="Title" class="form-check-input" disabled/>
+
+                                    <label asp-for="Description" class="form-check-label" disabled></label>
+                                    <input asp-for="Description" class="form-check-input" disabled />
+
+                                    <label asp-for="Deadline" class="form-check-label" disabled></label>
+                                    <input type="datetime" asp-for="Deadline" class="form-check-input" disabled/>
+                                </p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                @(Model.State == (int)DutyState.Done ? $"Complétée le {Model.CompletionDate?.ToShortDateString()}"
+                                                                     : $"Annulée le {Model.CompletionDate?.ToShortDateString()}")
+                            </div>
+                        </div>
+                    
+                        `,
+                showCloseButton: true
+            }
+        );
+    }
+</script>
