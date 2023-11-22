@@ -16,4 +16,3 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir : ./home/threesw/www
         local-dir: ./.static
-        args: --delete
