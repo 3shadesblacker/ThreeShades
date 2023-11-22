@@ -3,26 +3,16 @@ name: Deploy website on push
 jobs:
   web-deploy:
     name: Deploy
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-    - name: Install .NET
-      run: |
-          Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
-          ./dotnet-install.ps1 -InstallDir $env:USERPROFILE\dotnet -Runtime aspnetcore
-
-    - name: Build and publish application
-      run: |
-          dotnet restore
-          dotnet publish -c Release -o publish
     - name: Get latest code
       uses: actions/checkout@v3
 
-    - name: Deploy application
+    - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: files.000webhost.com
+        server: ftp.cluster029.hosting.ovh.net
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: public_html/
-        local-dir: ./publish
-        args: --delete
+        server-dir : ./home/threesw/www/
+        local-dir: ./.static/
