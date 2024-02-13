@@ -37,10 +37,6 @@ namespace MVC.Models
         [DisplayName("Annulées")]
         public IEnumerable<DutyViewModel> Canceled { get; set; } = new List<DutyViewModel>();
 
-        public DutyViewModel? Details { get; set; }
-
-        public DutyViewModel Edit { get; set; } = new DutyViewModel();
-
         [DisplayName("Tâches actives")]
         public int? NActive { get; set; }
 

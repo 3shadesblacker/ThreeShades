@@ -4,17 +4,11 @@
 }
 
 <div>
-    @*@if (Model.Details != null)
-    {
-    <partial name="_Details" model="@Model.Details" />
-    }
-
-    @if (Model.Edit != null)
-    {
-    <partial name="_Edit" model="@Model.Edit"/>
-    }*@
+    <div class="nav-actions">
+        <button class="btn btn-fab btn-info edit" href="#_Edit" onclick="edit()">Créer</button>
+    </div>
     <div class="card text-center container" id="dutyListContainer">
-        <div class="card-header">
+        <div class="card-header row">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
                     <button class="nav-link active" id="active" onclick="selectTab('active')">Active</button>
@@ -25,9 +19,6 @@
                 <li class="nav-item">
                     <button class="nav-link" id="canceled" onclick="selectTab('canceled')">Canceled</button>
                 </li>
-                @*<li>
-                    <button class="nav-link edit" href="#_Edit" onclick="edit()">Créer</a>
-                </li>*@
             </ul>
         </div>
         <div class="card-body">

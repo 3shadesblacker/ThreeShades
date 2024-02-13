@@ -13,11 +13,19 @@ html {
 body {
   margin-bottom: 60px;
 }
+.nav-actions{
+    margin-right: 0
+}
 
 .nav-link {
     flex:auto;
     flex-direction:row;
     display: flex !important;
+    align-items: end;
+}
+
+.nav-items {
+    align-items: end;
 }
 
 table {
